@@ -1,11 +1,29 @@
 import React from 'react';
-import './App.css';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {Container} from 'react-bootstrap';
 
-function App() {
+import './App.css';
+import CatsNavbar from './features/cats/presentation/components/CatsNavbar';
+import CatsBrowser from './features/cats/presentation/components/CatsBrowser';
+import CatDetails from './features/cats/presentation/components/CatDetails';
+
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <h1>Hello Cats</h1>
-    </div>
+    <Router>
+      <div className="App">
+        <CatsNavbar/>
+          <Container>
+            <Switch>
+              <Route exact path="/">
+                <CatsBrowser/>
+              </Route>
+              <Route exact path="/:id">
+                <CatDetails/>
+              </Route>
+            </Switch>
+          </Container>
+      </div>
+    </Router>
   );
 }
 
