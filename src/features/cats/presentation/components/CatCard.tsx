@@ -1,20 +1,18 @@
 import React from 'react';
 import { Card, Button, Col, Row } from 'react-bootstrap'
 
-import styles from './CatCard.module.scss'
-
-interface Props {
+interface IProps {
   id: string
   imageUrl: string,
 }
 
-const CatCard: React.FC<Props> = ({ id, imageUrl }) => {
+const CatCard: React.FC<IProps> = ({ id, imageUrl }) => {
   return (
-    <Col md={3} className="col-12">
-      <Card className={styles.card}>
-        <Card.Img variant="top" src={imageUrl}/>
+    <Col md={3} className="col-12 mb-3">
+      <Card className="image-card">
+        <Card.Img variant="top" src={imageUrl} width="300" height="300"/>
         <Card.Body>
-          <Row>
+          <Row className="px-3">
             <Button variant="primary">View Details</Button>
           </Row>
         </Card.Body>
