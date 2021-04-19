@@ -1,5 +1,6 @@
 import React from 'react';
-import { Card, Button, Col, Row } from 'react-bootstrap'
+import { Card, Col, Row } from 'react-bootstrap'
+import { Link } from 'react-router-dom';
 
 interface IProps {
   id: string
@@ -13,7 +14,7 @@ const CatCard: React.FC<IProps> = ({ id, imageUrl }) => {
         <Card.Img variant="top" src={imageUrl} width="300" height="300"/>
         <Card.Body>
           <Row className="px-3">
-            <Button variant="primary">View Details</Button>
+            <Link to={`/${id}`} className="btn btn-primary">View Details</Link>
           </Row>
         </Card.Body>
       </Card>
