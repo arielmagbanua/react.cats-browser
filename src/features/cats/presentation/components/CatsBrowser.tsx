@@ -1,23 +1,55 @@
-import React, { Dispatch, SetStateAction, useContext } from 'react';
+import React, {Dispatch, SetStateAction, useContext, useEffect, useState} from 'react';
 import { Row, Button, Col, Form } from 'react-bootstrap';
 
-import CatCard from './CatCard';
 import Breed from '../../data/models/Breed';
-import { BreedsContext, SelectBreedContext } from '../../providers/BreedsProvider';
-
-// TODO: Populate the dynamically the available images for the breed
-// TODO: Create load more mechanism to load more items.
+import { BreedsContext, SetSelectedBreedContext, SelectedBreedContext } from '../../providers/BreedsProvider';
+import CatCardList from './CatCardList';
 
 const CatsBrowser: React.FC = () => {
+  // context states
   const breeds = useContext<Breed[]>(BreedsContext);
-  const setSelectedBreed = useContext<Dispatch<SetStateAction<Breed | undefined>> | null>(SelectBreedContext);
+  const setSelectedBreed = useContext<Dispatch<SetStateAction<Breed | undefined>> | null>(SetSelectedBreedContext);
+  const currentBreed = useContext<Breed | undefined | null>(SelectedBreedContext);
+
+  // local states
+  const [page, setPage] = useState<number>(1);
+
+  const [loadMoreVisible, setLoadMoreVisibility] = useState<boolean>(true);
 
   const selectBreed = (e: React.ChangeEvent<HTMLInputElement>) => {
     const breedId = e.target.value;
-    const selectedBreed = breeds.find((breed: Breed) => breed.id === breedId);
+    const newSelectedBreed = breeds.find((breed: Breed) => breed.id === breedId);
 
     if (setSelectedBreed) {
-      setSelectedBreed(selectedBreed);
+      setSelectedBreed(newSelectedBreed);
+    }
+  };
+
+  const loadMore = () => {
+    setPage(page + 1);
+  }
+
+  useEffect(() => {
+    // reset page if breed was changed
+    setPage(1);
+
+    if (!currentBreed) {
+      // make sure the load more button is visible
+      setLoadMoreVisibility(false);
+      return;
+    }
+
+    // make sure the load more button is visible
+    setLoadMoreVisibility(true);
+  }, [currentBreed]);
+
+  const loadMoreButton = (visible: boolean) => {
+    if (visible) {
+      return (
+        <div className="d-flex justify-content-center mt-3">
+          <Button variant="success" onClick={loadMore}>Load More</Button>
+        </div>
+      );
     }
   }
 
@@ -41,11 +73,10 @@ const CatsBrowser: React.FC = () => {
       </Row>
       <br/>
       <Row>
-        <CatCard id="awts" imageUrl="https://cdn2.thecatapi.com/images/hBXicehMA.jpg"/>
+        <CatCardList breed={currentBreed} page={page} setLoadMoreVisibility={setLoadMoreVisibility}/>
       </Row>
-      <div className="d-flex justify-content-center">
-        <Button variant="success">Load More</Button>
-      </div>
+      { loadMoreButton(loadMoreVisible) }
+      <br/>
     </>
   );
 }
