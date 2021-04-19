@@ -5,6 +5,7 @@ import BreedsRemoteDataSource from '../../data/sources/BreedsRemoteDataSource';
 import Breed from '../../data/models/Breed';
 import BreedImage from '../../data/models/BreedImage';
 import CatCard from './CatCard';
+import { Row } from "react-bootstrap";
 
 interface IProps {
   breed: Breed | undefined | null,
@@ -62,16 +63,28 @@ const CatCardList: React.FC<IProps> = ({ breed, page, setLoadMoreVisibility }) =
     }
   }, [breed, page]);
 
+  const renderComponentTemplate = (breedImages: BreedImage[]) => {
+    if (breedImages.length === 0) {
+      return (
+        <Row>
+          <p>No cats available.</p>
+        </Row>
+      );
+    }
+
+    return breedImages.map((breedImage: BreedImage) => (
+      <CatCard
+        key={breedImage.id}
+        id={breedImage.id}
+        imageUrl={breedImage.url}
+      />
+    ));
+  }
+
   return (
     <>
       {
-        breedImages.map((breedImage: BreedImage) => (
-          <CatCard
-            key={breedImage.id}
-            id={breedImage.id}
-            imageUrl={breedImage.url}
-          />
-        ))
+        renderComponentTemplate(breedImages)
       }
     </>
   );
