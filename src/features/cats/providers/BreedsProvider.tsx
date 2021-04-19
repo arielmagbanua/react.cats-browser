@@ -21,7 +21,7 @@ const BreedsProvider = (props: any) => {
           setBreeds(breeds);
         });
     }
-  },[breeds])
+  },[breeds]);
 
   return (
     <BreedsContext.Provider value={breeds}>
