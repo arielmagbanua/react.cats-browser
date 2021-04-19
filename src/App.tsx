@@ -5,7 +5,7 @@ import { Container } from 'react-bootstrap';
 import './App.css';
 import CatsNavbar from './features/cats/presentation/components/CatsNavbar';
 import CatsBrowser from './features/cats/presentation/components/CatsBrowser';
-import CatDetails from './features/cats/presentation/components/CatDetails';
+import CatBreedDetails from './features/cats/presentation/components/CatBreedDetails';
 import BreedsProvider from './features/cats/providers/BreedsProvider';
 
 const App: React.FC = () => {
@@ -20,7 +20,7 @@ const App: React.FC = () => {
                 <CatsBrowser/>
               </Route>
               <Route exact path="/:id">
-                <CatDetails/>
+                <CatBreedDetails/>
               </Route>
             </Switch>
           </Container>
