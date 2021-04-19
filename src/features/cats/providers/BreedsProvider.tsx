@@ -5,7 +5,7 @@ import BreedsRemoteDataSource from '../data/sources/BreedsRemoteDataSource';
 
 // Contexts
 export const BreedsContext = React.createContext<Breed[]>([]);
-export const SetSelectedBreedSelectBreedContext = React.createContext<Dispatch<SetStateAction<Breed | undefined>> | null>(null);
+export const SetSelectedBreedContext = React.createContext<Dispatch<SetStateAction<Breed | undefined>> | null>(null);
 export const SelectedBreedContext = React.createContext<Breed | undefined | null>(null);
 
 const BreedsProvider = (props: any) => {
@@ -25,11 +25,11 @@ const BreedsProvider = (props: any) => {
 
   return (
     <BreedsContext.Provider value={breeds}>
-      <SetSelectedBreedSelectBreedContext.Provider value={setSelectedBreed}>
+      <SetSelectedBreedContext.Provider value={setSelectedBreed}>
         <SelectedBreedContext.Provider value={selectedBreed}>
           { props.children }
         </SelectedBreedContext.Provider>
-      </SetSelectedBreedSelectBreedContext.Provider>
+      </SetSelectedBreedContext.Provider>
     </BreedsContext.Provider>
   );
 }
