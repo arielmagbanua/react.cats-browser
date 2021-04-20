@@ -3,7 +3,7 @@ import { Row, Button, Col, Form } from 'react-bootstrap';
 
 import Breed from '../../data/models/Breed';
 import { BreedsContext, SetSelectedBreedContext, SelectedBreedContext } from '../../providers/BreedsProvider';
-import CatCardList from './CatCardList';
+import CatCardList from '../components/CatCardList';
 
 const CatsBrowser: React.FC = () => {
   // context states

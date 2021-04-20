@@ -4,7 +4,7 @@ import { Container } from 'react-bootstrap';
 
 import './App.css';
 import CatsNavbar from './features/cats/presentation/components/CatsNavbar';
-import CatsBrowser from './features/cats/presentation/components/CatsBrowser';
+import CatsBrowser from './features/cats/presentation/pages/CatsBrowser';
 import CatBreedDetails from './features/cats/presentation/components/CatBreedDetails';
 import BreedsProvider from './features/cats/providers/BreedsProvider';
 
