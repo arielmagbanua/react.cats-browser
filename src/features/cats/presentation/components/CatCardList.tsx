@@ -6,6 +6,8 @@ import CatsBreedRemoteDataSource from '../../data/sources/CatsBreedRemoteDataSou
 import Breed from '../../data/models/Breed';
 import BreedImage from '../../data/models/BreedImage';
 import CatCard from './CatCard';
+import ErrorMessage from '../../../../shared/components/ErrorMessage';
+import { useHasNetworkErrorHappenedContext } from '../providers/BreedsProvider';
 
 interface IProps {
   breed: Breed | undefined | null,
@@ -20,6 +22,8 @@ const CatCardList: React.FC<IProps> = ({ breed, page, setLoadMoreVisibility }) =
   // local state for detecting changes in the current selected breed
   const [prevBreed, setPrevBreed] = useState<Breed | undefined | null>(null);
 
+  const [networkHappened, setNetworkHappened] = useHasNetworkErrorHappenedContext();
+
   const sameBreedImageList = (previous: BreedImage[], current: BreedImage[]) => {
     // compare the array, return true regardless of the order as long as
     // both array have same values
@@ -31,6 +35,8 @@ const CatCardList: React.FC<IProps> = ({ breed, page, setLoadMoreVisibility }) =
       const breedsDataSource = new CatsBreedRemoteDataSource();
       breedsDataSource.getBreedImages(breed.id, page)
         .then((newImages: BreedImage[]) => {
+          setNetworkHappened && setNetworkHappened(false);
+
           if (!isEqual(breed, prevBreed)) {
             // this means the breed was switched and we have to set the new set of images
             setBreedImages(newImages);
@@ -56,6 +62,10 @@ const CatCardList: React.FC<IProps> = ({ breed, page, setLoadMoreVisibility }) =
             // no more new cat breed images therefore hide now the load more button
             setLoadMoreVisibility(false);
           }
+        })
+        .catch((_) => {
+          // something went wrong show the modal
+          setNetworkHappened && setNetworkHappened(true);
         });
     } else {
       // no selected breed, therefore clear the image cards and hide the load more button
@@ -82,10 +92,19 @@ const CatCardList: React.FC<IProps> = ({ breed, page, setLoadMoreVisibility }) =
     ));
   }
 
+  const renderErrorMessage = () => {
+    return <ErrorMessage
+      title="Network Error"
+      message="Apologies but we could not load new cats for you at this time! Meow!"
+    />;
+  }
+
+  console.log(networkHappened);
+
   return (
     <>
       {
-        renderComponentTemplate(breedImages)
+        networkHappened ? renderErrorMessage() : renderComponentTemplate(breedImages)
       }
     </>
   );
