@@ -2,7 +2,7 @@ import React, {Dispatch, SetStateAction, useContext, useEffect, useState} from '
 import { Row, Button, Col, Form } from 'react-bootstrap';
 
 import Breed from '../../data/models/Breed';
-import { BreedsContext, SetSelectedBreedContext, SelectedBreedContext } from '../../providers/BreedsProvider';
+import { BreedsContext, SetSelectedBreedContext, SelectedBreedContext } from '../providers/BreedsProvider';
 import CatCardList from '../components/CatCardList';
 
 const CatsBrowserPage: React.FC = () => {

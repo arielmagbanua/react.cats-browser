@@ -3,7 +3,7 @@ import { Navbar } from 'react-bootstrap';
 
 import logo from '../../../../logo.svg';
 import Breed from '../../data/models/Breed';
-import { SelectedBreedContext } from '../../providers/BreedsProvider';
+import { SelectedBreedContext } from '../providers/BreedsProvider';
 
 const CatsNavbar: React.FC = () => {
   const selectedBreed = useContext<Breed | undefined | null>(SelectedBreedContext);

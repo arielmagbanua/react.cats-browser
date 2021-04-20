@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
-import Breed from '../data/models/Breed';
-import CatsBreedRemoteDataSource from '../data/sources/CatsBreedRemoteDataSource';
+import Breed from '../../data/models/Breed';
+import CatsBreedRemoteDataSource from '../../data/sources/CatsBreedRemoteDataSource';
 
 // Contexts
 export const BreedsContext = React.createContext<Breed[]>([]);
