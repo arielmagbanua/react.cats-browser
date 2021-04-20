@@ -3,6 +3,8 @@ import Breed from '../models/Breed';
 import BreedImage from '../models/BreedImage';
 import CatsBreedDataSourceContract from './CatsBreedDataSourceContract';
 
+const CAT_API_BASE_ENDPOINT_V1 = 'https://api.thecatapi.com/v1';
+
 /**
  * The cat breed remote data source interface / contract for abstracting any data source for the breeds
  */
@@ -13,7 +15,7 @@ class CatsBreedRemoteDataSource implements CatsBreedDataSourceContract {
    * @returns Promise<Breed[]> which is promise that resolves to an array of breed.
    */
   async getBreeds(): Promise<Breed[]> {
-    const breeds = await http.get('https://api.thecatapi.com/v1/breeds');
+    const breeds = await http.get(CAT_API_BASE_ENDPOINT_V1 + '/breeds');
 
     return breeds.data.map((breedData: any) => {
       return {
@@ -35,7 +37,7 @@ class CatsBreedRemoteDataSource implements CatsBreedDataSourceContract {
    * @returns Promise<Breed> which is a promise that resolves to a breed object.
    */
   async getBreed(id: string): Promise<Breed> {
-    const breed = await http.get(`https://api.thecatapi.com/v1/breeds/search?q=${id}`);
+    const breed = await http.get(`${CAT_API_BASE_ENDPOINT_V1}/breeds/search?q=${id}`);
     return {
       id: breed.data.id,
       name: breed.data.name,
@@ -55,7 +57,7 @@ class CatsBreedRemoteDataSource implements CatsBreedDataSourceContract {
    */
   async getBreedImages(id: string, page: number = 1, limit: number = 10): Promise<BreedImage[]> {
     const breedImages = await http.get(
-      `https://api.thecatapi.com/v1/images/search?page=${page}&limit=${limit}&breed_id=${id}`
+      `${CAT_API_BASE_ENDPOINT_V1}/images/search?page=${page}&limit=${limit}&breed_id=${id}`
     );
 
     return breedImages.data.map((breedImageData: any) => {
