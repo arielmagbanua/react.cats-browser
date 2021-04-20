@@ -2,13 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Row, Button, Col, Form } from 'react-bootstrap';
 
 import Breed from '../../data/models/Breed';
-import { useBreedsContext, useCurrentSelectedBreed } from '../providers/BreedsProvider';
+import { useBreedsContext, useCurrentSelectedBreed, useNetworkErrorHappenedContext } from '../providers/BreedsProvider';
 import CatCardList from '../components/CatCardList';
 
 const CatsBrowserPage: React.FC = () => {
   // context states
   const breeds = useBreedsContext();
   const [currentBreed, setSelectedBreed] = useCurrentSelectedBreed();
+  const networkErrorHappened = useNetworkErrorHappenedContext();
 
   // local state for paging
   const [page, setPage] = useState<number>(1);
@@ -46,8 +47,8 @@ const CatsBrowserPage: React.FC = () => {
   }, [currentBreed]);
 
   // function for rendering the load more button
-  const renderLoadMoreButton = (visible: boolean) => {
-    if (visible) {
+  const renderLoadMoreButton = (visible: boolean, networkErrorHappened: boolean) => {
+    if (visible && !networkErrorHappened) {
       return (
         <div className="d-flex justify-content-center mt-3">
           <Button variant="success" onClick={loadMore}>Load More</Button>
@@ -78,7 +79,7 @@ const CatsBrowserPage: React.FC = () => {
       <Row>
         <CatCardList breed={currentBreed} page={page} setLoadMoreVisibility={setLoadMoreVisibility}/>
       </Row>
-      { renderLoadMoreButton(loadMoreVisible) }
+      { renderLoadMoreButton(loadMoreVisible, networkErrorHappened) }
       <br/>
     </>
   );
