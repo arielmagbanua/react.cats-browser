@@ -6,7 +6,7 @@ import CatsBreedDataSourceContract from './CatsBreedDataSourceContract';
 /**
  * The cat breed remote data source interface / contract for abstracting any data source for the breeds
  */
-class BreedsRemoteDataSource implements CatsBreedDataSourceContract {
+class CatsBreedRemoteDataSource implements CatsBreedDataSourceContract {
   /**
    * Retrieves all cat breeds.
    *
@@ -69,4 +69,4 @@ class BreedsRemoteDataSource implements CatsBreedDataSourceContract {
   }
 }
 
-export default BreedsRemoteDataSource;
+export default CatsBreedRemoteDataSource;

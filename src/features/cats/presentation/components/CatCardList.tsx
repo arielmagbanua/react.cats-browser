@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { isEqual, sortBy, differenceWith } from 'lodash';
 import { Row } from 'react-bootstrap';
 
-import BreedsRemoteDataSource from '../../data/sources/BreedsRemoteDataSource';
+import CatsBreedRemoteDataSource from '../../data/sources/CatsBreedRemoteDataSource';
 import Breed from '../../data/models/Breed';
 import BreedImage from '../../data/models/BreedImage';
 import CatCard from './CatCard';
@@ -35,7 +35,7 @@ const CatCardList: React.FC<IProps> = ({ breed, page, setLoadMoreVisibility }) =
       // breed switch then show the loading spinner
       setLoading(true);
 
-      const breedsDataSource = new BreedsRemoteDataSource();
+      const breedsDataSource = new CatsBreedRemoteDataSource();
       breedsDataSource.getBreedImages(breed.id, page)
         .then((newImages: BreedImage[]) => {
           setLoading(false);
