@@ -11,11 +11,13 @@ const CatsBrowser: React.FC = () => {
   const setSelectedBreed = useContext<Dispatch<SetStateAction<Breed | undefined>> | null>(SetSelectedBreedContext);
   const currentBreed = useContext<Breed | undefined | null>(SelectedBreedContext);
 
-  // local states
+  // local state for paging
   const [page, setPage] = useState<number>(1);
 
+  // local state for controlling the load more button visibility
   const [loadMoreVisible, setLoadMoreVisibility] = useState<boolean>(true);
 
+  // call back function for changing the breed
   const selectBreed = (e: React.ChangeEvent<HTMLInputElement>) => {
     const breedId = e.target.value;
     const newSelectedBreed = breeds.find((breed: Breed) => breed.id === breedId);
@@ -25,6 +27,7 @@ const CatsBrowser: React.FC = () => {
     }
   };
 
+  // call back function for loading the next page
   const loadMore = () => {
     setPage(page + 1);
   }
@@ -35,7 +38,7 @@ const CatsBrowser: React.FC = () => {
 
     if (!currentBreed) {
       // make sure the load more button is visible
-      setLoadMoreVisibility(false);
+      setLoadMoreVisibility(true);
       return;
     }
 
@@ -43,7 +46,8 @@ const CatsBrowser: React.FC = () => {
     setLoadMoreVisibility(true);
   }, [currentBreed]);
 
-  const loadMoreButton = (visible: boolean) => {
+  // function for rendering the load more button
+  const renderLoadMoreButton = (visible: boolean) => {
     if (visible) {
       return (
         <div className="d-flex justify-content-center mt-3">
@@ -75,7 +79,7 @@ const CatsBrowser: React.FC = () => {
       <Row>
         <CatCardList breed={currentBreed} page={page} setLoadMoreVisibility={setLoadMoreVisibility}/>
       </Row>
-      { loadMoreButton(loadMoreVisible) }
+      { renderLoadMoreButton(loadMoreVisible) }
       <br/>
     </>
   );
