@@ -9,7 +9,7 @@ interface Params {
   id: string
 }
 
-const CatCard: React.FC = () => {
+const CatBreedDetailsPage: React.FC = () => {
   const currentBreed = useContext<Breed | undefined | null>(SelectedBreedContext);
 
   const { id } = useParams<Params>();
@@ -49,4 +49,4 @@ const CatCard: React.FC = () => {
   );
 }
 
-export default CatCard;
+export default CatBreedDetailsPage;

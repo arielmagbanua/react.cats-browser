@@ -5,7 +5,7 @@ import Breed from '../../data/models/Breed';
 import { BreedsContext, SetSelectedBreedContext, SelectedBreedContext } from '../../providers/BreedsProvider';
 import CatCardList from '../components/CatCardList';
 
-const CatsBrowser: React.FC = () => {
+const CatsBrowserPage: React.FC = () => {
   // context states
   const breeds = useContext<Breed[]>(BreedsContext);
   const setSelectedBreed = useContext<Dispatch<SetStateAction<Breed | undefined>> | null>(SetSelectedBreedContext);
@@ -85,4 +85,4 @@ const CatsBrowser: React.FC = () => {
   );
 }
 
-export default CatsBrowser;
+export default CatsBrowserPage;
