@@ -6,7 +6,7 @@ import './App.css';
 import CatsNavbar from './features/cats/presentation/components/CatsNavbar';
 import CatsBrowserPage from './features/cats/presentation/pages/CatsBrowserPage';
 import CatBreedDetailsPage from './features/cats/presentation/pages/CatBreedDetailsPage';
-import BreedsProvider from './features/cats/providers/BreedsProvider';
+import BreedsProvider from './features/cats/presentation/providers/BreedsProvider';
 
 const App: React.FC = () => {
   return (

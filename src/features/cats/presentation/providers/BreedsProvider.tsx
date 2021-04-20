@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
-import Breed from '../data/models/Breed';
-import BreedsRemoteDataSource from '../data/sources/BreedsRemoteDataSource';
+import Breed from '../../data/models/Breed';
+import CatsBreedRemoteDataSource from '../../data/sources/CatsBreedRemoteDataSource';
 
 // Contexts
 export const BreedsContext = React.createContext<Breed[]>([]);
@@ -15,7 +15,7 @@ const BreedsProvider = (props: any) => {
   useEffect(() => {
     if (breeds.length === 0) {
       // no breeds yet so fetch it
-      const breedsDataSource = new BreedsRemoteDataSource();
+      const breedsDataSource = new CatsBreedRemoteDataSource();
       breedsDataSource.getBreeds()
         .then((breeds: Breed[]) => {
           setBreeds(breeds);
