@@ -1,14 +1,15 @@
-import React, {useContext} from 'react';
+import React, { useContext } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import { Button, Card, Container } from "react-bootstrap";
-import Breed from "../../data/models/Breed";
-import { SelectedBreedContext } from "../../providers/BreedsProvider";
+
+import Breed from '../../data/models/Breed';
+import { SelectedBreedContext } from '../../providers/BreedsProvider';
 
 interface Params {
   id: string
 }
 
-const CatCard: React.FC = () => {
+const CatBreedDetailsPage: React.FC = () => {
   const currentBreed = useContext<Breed | undefined | null>(SelectedBreedContext);
 
   const { id } = useParams<Params>();
@@ -48,4 +49,4 @@ const CatCard: React.FC = () => {
   );
 }
 
-export default CatCard;
+export default CatBreedDetailsPage;

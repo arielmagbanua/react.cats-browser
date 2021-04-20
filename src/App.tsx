@@ -4,8 +4,8 @@ import { Container } from 'react-bootstrap';
 
 import './App.css';
 import CatsNavbar from './features/cats/presentation/components/CatsNavbar';
-import CatsBrowser from './features/cats/presentation/components/CatsBrowser';
-import CatBreedDetails from './features/cats/presentation/components/CatBreedDetails';
+import CatsBrowserPage from './features/cats/presentation/pages/CatsBrowserPage';
+import CatBreedDetailsPage from './features/cats/presentation/pages/CatBreedDetailsPage';
 import BreedsProvider from './features/cats/providers/BreedsProvider';
 
 const App: React.FC = () => {
@@ -17,10 +17,10 @@ const App: React.FC = () => {
           <Container>
             <Switch>
               <Route exact path="/">
-                <CatsBrowser/>
+                <CatsBrowserPage/>
               </Route>
               <Route exact path="/:id">
-                <CatBreedDetails/>
+                <CatBreedDetailsPage/>
               </Route>
             </Switch>
           </Container>
