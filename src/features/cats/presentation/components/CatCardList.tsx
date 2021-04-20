@@ -6,7 +6,6 @@ import CatsBreedRemoteDataSource from '../../data/sources/CatsBreedRemoteDataSou
 import Breed from '../../data/models/Breed';
 import BreedImage from '../../data/models/BreedImage';
 import CatCard from './CatCard';
-import LoadingSpinner from './LoadingSpinner';
 
 interface IProps {
   breed: Breed | undefined | null,
@@ -21,9 +20,6 @@ const CatCardList: React.FC<IProps> = ({ breed, page, setLoadMoreVisibility }) =
   // local state for detecting changes in the current selected breed
   const [prevBreed, setPrevBreed] = useState<Breed | undefined | null>(null);
 
-  // local state for managing loading spinner
-  const [loading, setLoading] = useState<boolean>(false);
-
   const sameBreedImageList = (previous: BreedImage[], current: BreedImage[]) => {
     // compare the array, return true regardless of the order as long as
     // both array have same values
@@ -32,14 +28,9 @@ const CatCardList: React.FC<IProps> = ({ breed, page, setLoadMoreVisibility }) =
 
   useEffect(() => {
     if (breed) {
-      // breed switch then show the loading spinner
-      setLoading(true);
-
       const breedsDataSource = new CatsBreedRemoteDataSource();
       breedsDataSource.getBreedImages(breed.id, page)
         .then((newImages: BreedImage[]) => {
-          setLoading(false);
-
           if (!isEqual(breed, prevBreed)) {
             // this means the breed was switched and we have to set the new set of images
             setBreedImages(newImages);
@@ -74,12 +65,6 @@ const CatCardList: React.FC<IProps> = ({ breed, page, setLoadMoreVisibility }) =
 
   // render the correct component template
   const renderComponentTemplate = (breedImages: BreedImage[]) => {
-    if (loading) {
-      return (
-        <LoadingSpinner/>
-      );
-    }
-
     if (breedImages.length === 0) {
       return (
         <Row>
