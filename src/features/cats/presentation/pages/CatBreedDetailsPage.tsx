@@ -1,16 +1,15 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useHistory, useParams } from 'react-router-dom';
-import { Button, Card, Container } from "react-bootstrap";
+import { Button, Card, Container } from 'react-bootstrap';
 
-import Breed from '../../data/models/Breed';
-import { SelectedBreedContext } from '../../providers/BreedsProvider';
+import { useSelectedBreedContext } from '../providers/BreedsProvider';
 
 interface Params {
   id: string
 }
 
 const CatBreedDetailsPage: React.FC = () => {
-  const currentBreed = useContext<Breed | undefined | null>(SelectedBreedContext);
+  const currentBreed = useSelectedBreedContext();
 
   const { id } = useParams<Params>();
   const history = useHistory<History>();

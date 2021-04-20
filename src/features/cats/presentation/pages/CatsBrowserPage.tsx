@@ -1,15 +1,14 @@
-import React, {Dispatch, SetStateAction, useContext, useEffect, useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import { Row, Button, Col, Form } from 'react-bootstrap';
 
 import Breed from '../../data/models/Breed';
-import { BreedsContext, SetSelectedBreedContext, SelectedBreedContext } from '../providers/BreedsProvider';
+import { useBreedsContext, useCurrentSelectedBreed } from '../providers/BreedsProvider';
 import CatCardList from '../components/CatCardList';
 
 const CatsBrowserPage: React.FC = () => {
   // context states
-  const breeds = useContext<Breed[]>(BreedsContext);
-  const setSelectedBreed = useContext<Dispatch<SetStateAction<Breed | undefined>> | null>(SetSelectedBreedContext);
-  const currentBreed = useContext<Breed | undefined | null>(SelectedBreedContext);
+  const breeds = useBreedsContext();
+  const [currentBreed, setSelectedBreed] = useCurrentSelectedBreed();
 
   // local state for paging
   const [page, setPage] = useState<number>(1);
