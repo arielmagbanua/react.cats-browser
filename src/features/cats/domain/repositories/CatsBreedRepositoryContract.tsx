@@ -1,10 +1,10 @@
-import Breed from '../models/Breed';
-import BreedImage from '../models/BreedImage';
+import Breed from '../../data/models/Breed';
+import BreedImage from '../../data/models/BreedImage';
 
 /**
- * The breed data source interface / contract for abstracting any data source for the breeds
+ * The base repository class that can be implemented by any repository data source
  */
-abstract class CatsBreedDataSourceContract {
+abstract class CatsBreedRepositoryContract {
   /**
    * Retrieves all breeds.
    *
@@ -31,4 +31,4 @@ abstract class CatsBreedDataSourceContract {
   abstract getBreedImages(id: string, page: number, limit: number): Promise<BreedImage[]>;
 }
 
-export default CatsBreedDataSourceContract;
+export default CatsBreedRepositoryContract;

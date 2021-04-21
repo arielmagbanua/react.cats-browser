@@ -1,12 +1,11 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Navbar } from 'react-bootstrap';
 
 import logo from '../../../../logo.svg';
-import Breed from '../../data/models/Breed';
-import { SelectedBreedContext } from '../providers/BreedsProvider';
+import { useSelectedBreedContext } from '../providers/BreedsProvider';
 
 const CatsNavbar: React.FC = () => {
-  const selectedBreed = useContext<Breed | undefined | null>(SelectedBreedContext);
+  const selectedBreed = useSelectedBreedContext();
 
   let title = 'Cats Browser';
 
