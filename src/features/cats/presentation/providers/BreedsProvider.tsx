@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction, useContext, useEffect, useState } from 'react';
 
 import Breed from '../../data/models/Breed';
-import CatsBreedRemoteDataSource from '../../data/sources/CatsBreedRemoteDataSource';
+import getBreedsUseCase from '../../domain/use-cases/GetBreeds';
 
 // Contexts
 export const BreedsContext = React.createContext<Breed[]>([]);
@@ -60,8 +60,7 @@ const BreedsProvider = (props: any) => {
   useEffect(() => {
     if (breeds.length === 0) {
       // no breeds yet so fetch it
-      const breedsDataSource = new CatsBreedRemoteDataSource();
-      breedsDataSource.getBreeds()
+      getBreedsUseCase.getBreeds()
         .then((breeds: Breed[]) => {
           setNetworkHappened(false);
 
