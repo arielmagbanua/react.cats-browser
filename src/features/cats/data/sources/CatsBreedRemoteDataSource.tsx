@@ -20,7 +20,14 @@ class CatsBreedRemoteDataSource implements CatsBreedDataSourceContract {
   async getBreeds(): Promise<Breed[]> {
     const breeds = await http.get(CatsBreedRemoteDataSource.CAT_API_BASE_ENDPOINT_V1 + '/breeds');
 
-    return breeds.data.map((breedData: any) => {
+    return breeds.data.map((breedData: {
+      id: string;
+      name: string;
+      temperament: string;
+      description: string;
+      origin: string;
+      reference_image_id: string;
+    }) => {
       return {
         id: breedData.id,
         name: breedData.name,
@@ -58,12 +65,12 @@ class CatsBreedRemoteDataSource implements CatsBreedDataSourceContract {
    * @param page The page number.
    * @param limit The maximum number of results that will be returned.
    */
-  async getBreedImages(id: string, page: number = 1, limit: number = 10): Promise<BreedImage[]> {
+  async getBreedImages(id: string, page = 1, limit = 10): Promise<BreedImage[]> {
     const breedImages = await http.get(
       `${CatsBreedRemoteDataSource.CAT_API_BASE_ENDPOINT_V1}/images/search?page=${page}&limit=${limit}&breed_id=${id}`
     );
 
-    return breedImages.data.map((breedImageData: any) => {
+    return breedImages.data.map((breedImageData: { id: string; url: string; width: number; height: number; }) => {
       return {
         id: breedImageData.id,
         url: breedImageData.url,
