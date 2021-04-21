@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { isEqual, sortBy, differenceWith } from 'lodash';
 import { Row } from 'react-bootstrap';
 
-import CatsBreedRemoteDataSource from '../../data/sources/CatsBreedRemoteDataSource';
+import { getBreedImages } from '../../domain/use-cases/CatBreedsUseCases';
 import Breed from '../../data/models/Breed';
 import BreedImage from '../../data/models/BreedImage';
 import CatCard from './CatCard';
@@ -32,8 +32,8 @@ const CatCardList: React.FC<IProps> = ({ breed, page, setLoadMoreVisibility }) =
 
   useEffect(() => {
     if (breed) {
-      const breedsDataSource = new CatsBreedRemoteDataSource();
-      breedsDataSource.getBreedImages(breed.id, page)
+      // const breedsDataSource = new CatsBreedRemoteDataSource();
+      getBreedImages.execute(breed.id, page)
         .then((newImages: BreedImage[]) => {
           setNetworkHappened && setNetworkHappened(false);
 
@@ -98,8 +98,6 @@ const CatCardList: React.FC<IProps> = ({ breed, page, setLoadMoreVisibility }) =
       message="Apologies but we could not load new cats for you at this time! Meow!"
     />;
   }
-
-  console.log(networkHappened);
 
   return (
     <>
