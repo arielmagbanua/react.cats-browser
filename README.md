@@ -1,12 +1,20 @@
-# Getting Started with Create React App
+# Cats Browser App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A ReactJS application written in `typescript`.
+This application was built using `react-bootstrap`, `react-router-dom`, `axios`, and React's `context` hook.
+
+See this in action [here](https://react-cats-browser.firebaseapp.com/).
+
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `yarn start`
+### `npm install`
+
+Installs the needed dependencies.
+
+### `npm run start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
@@ -14,12 +22,11 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 The page will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `yarn test`
+### `npx eslint . --ext .js,.jsx,.ts,.tsx`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+This will run the typescript linting to check for syntax errors and faulty coding style.
 
-### `yarn build`
+### `npm run build`
 
 Builds the app for production to the `build` folder.\
 It correctly bundles React in production mode and optimizes the build for the best performance.
@@ -29,7 +36,7 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `yarn eject`
+### `npm run eject`
 
 **Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
@@ -39,8 +46,21 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Firebase Hosting
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### `npm install -g firebase-tools`
+
+Install the firebase tools globally.
+
+### `firebase login`
+
+Login to your firebase account.
+
+### `firebase init`
+
+Initialize firebase in this project and select `hosting` in the project setup.
+
+### `firebase deploy`
+
+Deploy this application to firebase.
