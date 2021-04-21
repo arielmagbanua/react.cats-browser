@@ -7,7 +7,7 @@ interface BreedImage {
    *
    * @type {string}
    */
-  id: string
+  id: string,
 
   /**
    * The url of the breed image.
@@ -21,7 +21,7 @@ interface BreedImage {
    *
    * @type {number}
    */
-  width: number
+  width: number,
 
   /**
    * The height of the image.

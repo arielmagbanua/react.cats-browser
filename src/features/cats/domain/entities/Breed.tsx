@@ -7,7 +7,7 @@ interface Breed {
    *
    * @type {string}
    */
-  id: string
+  id: string,
 
   /**
    * The name of the breed
@@ -40,8 +40,9 @@ interface Breed {
   /**
    * The reference image of a cat that represents this breed.
    *
+   * @type {string}
    */
-  referenceImageId?: string,
+  referenceImageId?: string
 }
 
 export default Breed;
