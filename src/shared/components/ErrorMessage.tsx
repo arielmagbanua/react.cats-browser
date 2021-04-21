@@ -6,6 +6,13 @@ interface IProps {
   message: string
 }
 
+/**
+ * Error message component.
+ * This component renders bootstrap alert message for displayin errors.
+ *
+ * @param title The title of the error.
+ * @param message The message of the error.
+ */
 const ErrorMessage: React.FC<IProps> = ({ title, message }) => {
   return (
     <Alert variant="danger">

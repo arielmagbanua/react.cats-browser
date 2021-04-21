@@ -52,7 +52,11 @@ export const useHasNetworkErrorHappenedContext = (): [boolean, Dispatch<SetState
   return [left, right];
 }
 
-const BreedsProvider = (props: any) => {
+interface IProps {
+  children: React.ReactNode
+}
+
+const BreedsProvider = ({ children }: IProps): JSX.Element => {
   const [breeds, setBreeds] = useState<Breed[]>([]);
   const [selectedBreed, setSelectedBreed] = useState<Breed | undefined>();
   const [networkHappened, setNetworkHappened] = useState<boolean>(false);
@@ -66,7 +70,7 @@ const BreedsProvider = (props: any) => {
 
           setBreeds(breeds);
         })
-        .catch((_) => {
+        .catch(() => {
           setNetworkHappened(true);
         });
     }
@@ -78,7 +82,7 @@ const BreedsProvider = (props: any) => {
         <SelectedBreedContext.Provider value={selectedBreed}>
           <SetNetworkErrorHappenedContext.Provider value={setNetworkHappened}>
             <NetworkErrorHappenedContext.Provider value={networkHappened}>
-              { props.children }
+              { children }
             </NetworkErrorHappenedContext.Provider>
           </SetNetworkErrorHappenedContext.Provider>
         </SelectedBreedContext.Provider>

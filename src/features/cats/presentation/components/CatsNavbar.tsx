@@ -4,6 +4,10 @@ import { Navbar } from 'react-bootstrap';
 import logo from '../../../../logo.svg';
 import { useSelectedBreedContext } from '../providers/BreedsProvider';
 
+/**
+ * The Navbar component.
+ * This displays the name of the currently selected breed.
+ */
 const CatsNavbar: React.FC = () => {
   const selectedBreed = useSelectedBreedContext();
 

@@ -7,6 +7,13 @@ interface IProps {
   imageUrl: string,
 }
 
+/**
+ * Cat card component.
+ * This component renders the cat card which contains the image of the card and view details button.
+ *
+ * @param id The id of the cat breed.
+ * @param imageUrl The image url of the cat.
+ */
 const CatCard: React.FC<IProps> = ({ id, imageUrl }) => {
   return (
     <Col md={3} className="col-12 mb-3">
