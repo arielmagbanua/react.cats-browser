@@ -1,6 +1,6 @@
 # Cats Browser App
 
-[react ci](https://github.com/arielmagbanua/react.cats-browser/actions/workflows/react-ci.yml/badge.svg)
+![react ci](https://github.com/arielmagbanua/react.cats-browser/actions/workflows/react-ci.yml/badge.svg)
 
 A ReactJS application written in `typescript`.
 This application was built using `react-bootstrap`, `react-router-dom`, `axios`, and React's `context` hook.
