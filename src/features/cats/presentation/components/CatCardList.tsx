@@ -71,7 +71,7 @@ const CatCardList: React.FC<IProps> = ({ breed, page, setLoadMoreVisibility }) =
             setLoadMoreVisibility(false);
           }
         })
-        .catch((_) => {
+        .catch(() => {
           // something went wrong show the modal
           setNetworkHappened && setNetworkHappened(true);
         });

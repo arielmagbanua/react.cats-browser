@@ -57,7 +57,7 @@ export class GetBreedImages extends UseCase {
    * @param page The page number.
    * @param limit The maximum number of results that will be returned.
    */
-  execute(id: string, page: number, limit: number = 10): Promise<BreedImage[]> {
+  execute(id: string, page: number, limit = 10): Promise<BreedImage[]> {
     return this.catsBreedRepository.getBreedImages(id, page, limit);
   }
 }
