@@ -5,7 +5,6 @@ import BreedImage from '../models/BreedImage';
  * The breed data source interface / contract for abstracting any data source for the breeds
  */
 abstract class CatsBreedDataSourceContract {
-
   /**
    * Retrieves all breeds.
    *
