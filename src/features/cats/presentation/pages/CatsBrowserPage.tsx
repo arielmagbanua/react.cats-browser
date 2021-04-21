@@ -5,6 +5,10 @@ import Breed from '../../data/models/Breed';
 import { useBreedsContext, useCurrentSelectedBreed, useNetworkErrorHappenedContext } from '../providers/BreedsProvider';
 import CatCardList from '../components/CatCardList';
 
+/**
+ * The cats browser page component.
+ * This page component holds the cat breed image card list as well as the load more button.
+ */
 const CatsBrowserPage: React.FC = () => {
   // context states
   const breeds = useBreedsContext();

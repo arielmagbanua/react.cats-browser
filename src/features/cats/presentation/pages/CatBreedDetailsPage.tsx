@@ -8,6 +8,10 @@ interface Params {
   id: string
 }
 
+/**
+ * The cat breed details page.
+ * This page component display the details of cat breed with the image of the cat.
+ */
 const CatBreedDetailsPage: React.FC = () => {
   const currentBreed = useSelectedBreedContext();
 
