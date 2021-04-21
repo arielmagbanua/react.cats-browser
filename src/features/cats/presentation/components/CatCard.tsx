@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Col, Row } from 'react-bootstrap'
 import { Link } from 'react-router-dom';
+import styles from './CatCard.module.scss';
 
 interface IProps {
   id: string
@@ -17,7 +18,7 @@ interface IProps {
 const CatCard: React.FC<IProps> = ({ id, imageUrl }) => {
   return (
     <Col md={3} className="col-12 mb-3">
-      <Card className="image-card">
+      <Card className={styles['image-card']}>
         <Card.Img variant="top" src={imageUrl} width="300" height="300"/>
         <Card.Body>
           <Row className="px-3">
