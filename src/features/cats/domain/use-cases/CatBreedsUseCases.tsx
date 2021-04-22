@@ -1,5 +1,5 @@
-import Breed from '../../data/models/Breed';
 import BreedImage from '../entities/BreedImage';
+import Breed from '../entities/Breed';
 import CatsBreedRepository from '../../data/repositories/CatsBreedRepository';
 import CatsBreedRemoteDataSource from '../../data/sources/CatsBreedRemoteDataSource';
 import UseCase from './UseCase';
@@ -35,7 +35,7 @@ export class GetBreed extends UseCase {
    *
    * @param id The id of the breed
    *
-   * @returns Promise<Breed> which is a promise that resolves to a breed object.
+   * @returns Promise<Breed>
    */
   execute(id: string): Promise<Breed> {
     return this.catsBreedRepository.getBreed(id);
@@ -56,10 +56,26 @@ export class GetBreedImages extends UseCase {
    * @param id The id of the breed.
    * @param page The page number.
    * @param limit The maximum number of results that will be returned.
+   *
+   * @returns Promise<BreedImage[]>
    */
   execute(id: string, page: number, limit = 10): Promise<BreedImage[]> {
     return this.catsBreedRepository.getBreedImages(id, page, limit);
   }
+}
+
+export class GetBreedImage extends UseCase {
+  /**
+   * Retrieves breed image by image id.
+   *
+   * @param id The id of the image.
+   *
+   * @returns Promise<BreedImage>
+   */
+  execute(id: string): Promise<BreedImage> {
+    return this.catsBreedRepository.getBreedImage(id);
+  }
+
 }
 
 // due to limitation of react somehow it won't allow implementation of
@@ -73,3 +89,4 @@ const catsBreedRepository = new CatsBreedRepository(
 export const getBreeds = new GetBreeds(catsBreedRepository);
 export const getBreed = new GetBreed(catsBreedRepository);
 export const getBreedImages = new GetBreedImages(catsBreedRepository);
+export const getBreedImage = new GetBreedImage(catsBreedRepository);

@@ -1,6 +1,8 @@
 /**
  * BreedImage Entity
  */
+import Breed from "./Breed";
+
 interface BreedImage {
   /**
    * The id of the breed
@@ -28,7 +30,14 @@ interface BreedImage {
    *
    * @type {number}
    */
-  height: number
+  height: number,
+
+  /**
+   * The array of breeds associated to this breed image.
+   *
+   * @type {Breed[]}
+   */
+  breeds?: Breed[]
 }
 
 export default BreedImage;

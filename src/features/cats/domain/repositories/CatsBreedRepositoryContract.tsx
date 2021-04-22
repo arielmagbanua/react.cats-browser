@@ -8,7 +8,7 @@ abstract class CatsBreedRepositoryContract {
   /**
    * Retrieves all breeds.
    *
-   * @returns Promise<Breed[]> which is promise that resolves to an array of breed.
+   * @returns Promise<Breed[]>
    */
   abstract getBreeds(): Promise<Breed[]>;
 
@@ -17,7 +17,7 @@ abstract class CatsBreedRepositoryContract {
    *
    * @param id The id of the breed
    *
-   * @returns Promise<Breed> which is a promise that resolves to a breed object.
+   * @returns Promise<Breed>
    */
   abstract getBreed(id: string): Promise<Breed>;
 
@@ -27,8 +27,19 @@ abstract class CatsBreedRepositoryContract {
    * @param id The id of the breed.
    * @param page The page number.
    * @param limit The maximum number of results that will be returned.
+   *
+   * @returns Promise<BreedImage[]>
    */
   abstract getBreedImages(id: string, page: number, limit: number): Promise<BreedImage[]>;
+
+  /**
+   * Retrieve a specific cat breed image.
+   *
+   * @param id The id of the image.
+   *
+   * @returns Promise<BreedImage>
+   */
+  abstract getBreedImage(id: string): Promise<BreedImage>;
 }
 
 export default CatsBreedRepositoryContract;

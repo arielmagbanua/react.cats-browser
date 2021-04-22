@@ -19,7 +19,7 @@ abstract class UseCase {
    * @param args
    */
   // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types,@typescript-eslint/no-explicit-any
-  abstract execute(...args: any): Promise<Breed[]> | Promise<Breed> | Promise<BreedImage[]>;
+  abstract execute(...args: any): Promise<Breed[]> | Promise<Breed> | Promise<BreedImage> | Promise<BreedImage[]>;
 }
 
 export default UseCase;

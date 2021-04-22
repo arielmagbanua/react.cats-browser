@@ -15,7 +15,7 @@ class CatsBreedRepository extends CatsBreedRepositoryContract {
   /**
    * Retrieves all breeds.
    *
-   * @returns Promise<Breed[]> which is promise that resolves to an array of breed.
+   * @returns Promise<Breed[]>
    */
   getBreeds(): Promise<Breed[]> {
     return this.remoteDataSource.getBreeds();
@@ -26,7 +26,7 @@ class CatsBreedRepository extends CatsBreedRepositoryContract {
    *
    * @param id The id of the breed
    *
-   * @returns Promise<Breed> which is a promise that resolves to a breed object.
+   * @returns Promise<Breed>
    */
   getBreed(id: string): Promise<Breed> {
     return this.remoteDataSource.getBreed(id);
@@ -38,9 +38,22 @@ class CatsBreedRepository extends CatsBreedRepositoryContract {
    * @param id The id of the breed.
    * @param page The page number.
    * @param limit The maximum number of results that will be returned.
+   *
+   * @returns Promise<BreedImage[]>
    */
   getBreedImages(id: string, page: number, limit: number): Promise<BreedImage[]> {
     return this.remoteDataSource.getBreedImages(id, page, limit);
+  }
+
+  /**
+   * Retrieve a specific cat breed image.
+   *
+   * @param id The id of the image.
+   *
+   * @returns Promise<BreedImage>
+   */
+  getBreedImage(id: string): Promise<BreedImage> {
+    return this.remoteDataSource.getBreedImage(id);
   }
 }
 
