@@ -21,6 +21,7 @@ interface IProps {
  * This component display the cat card images for the currently selected breed.
  *
  * @param breed The selected breed.
+ * @param preSelectedBreed The pre selected breed through the url params.
  * @param page The current page that is being loaded.
  * @param setLoadMoreVisibility The reference of the callback for controlling the visibility of the load more button.
  */
