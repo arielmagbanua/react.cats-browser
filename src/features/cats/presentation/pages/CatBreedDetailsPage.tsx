@@ -19,7 +19,12 @@ const CatBreedDetailsPage: React.FC = () => {
   const history = useHistory<History>();
 
   const goBack = () => {
-    history.push('/');
+    if (currentBreed) {
+      history.push({
+        pathname: '/',
+        search: `?breed=${currentBreed.id}`
+      });
+    }
   }
 
   return (

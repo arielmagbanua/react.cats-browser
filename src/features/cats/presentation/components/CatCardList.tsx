@@ -11,6 +11,7 @@ import { useHasNetworkErrorHappenedContext } from '../providers/BreedsProvider';
 
 interface IProps {
   breed: Breed | undefined | null,
+  preSelectedBreed: Breed | undefined | null,
   page: number,
   setLoadMoreVisibility: (val: boolean) => void
 }
@@ -20,10 +21,11 @@ interface IProps {
  * This component display the cat card images for the currently selected breed.
  *
  * @param breed The selected breed.
+ * @param preSelectedBreed The pre selected breed through the url params.
  * @param page The current page that is being loaded.
  * @param setLoadMoreVisibility The reference of the callback for controlling the visibility of the load more button.
  */
-const CatCardList: React.FC<IProps> = ({ breed, page, setLoadMoreVisibility }) => {
+const CatCardList: React.FC<IProps> = ({ breed, preSelectedBreed, page, setLoadMoreVisibility }) => {
   // local state for handling breed images per selected breed
   const [breedImages, setBreedImages] = useState<BreedImage[]>([]);
 
@@ -39,9 +41,11 @@ const CatCardList: React.FC<IProps> = ({ breed, page, setLoadMoreVisibility }) =
   }
 
   useEffect(() => {
-    if (breed) {
+    const selectedBreed = breed ?? preSelectedBreed;
+
+    if (selectedBreed) {
       // const breedsDataSource = new CatsBreedRemoteDataSource();
-      getBreedImages.execute(breed.id, page)
+      getBreedImages.execute(selectedBreed.id, page)
         .then((newImages: BreedImage[]) => {
           setNetworkHappened && setNetworkHappened(false);
 
@@ -79,7 +83,7 @@ const CatCardList: React.FC<IProps> = ({ breed, page, setLoadMoreVisibility }) =
       // no selected breed, therefore clear the image cards and hide the load more button
       setBreedImages([]);
     }
-  }, [breed, page]);
+  }, [breed, page, preSelectedBreed]);
 
   // render the correct component template
   const renderComponentTemplate = (breedImages: BreedImage[]) => {
