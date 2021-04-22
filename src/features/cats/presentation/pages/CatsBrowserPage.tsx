@@ -4,6 +4,12 @@ import { Row, Button, Col, Form } from 'react-bootstrap';
 import Breed from '../../data/models/Breed';
 import { useBreedsContext, useCurrentSelectedBreed, useNetworkErrorHappenedContext } from '../providers/BreedsProvider';
 import CatCardList from '../components/CatCardList';
+import { useHistory, useLocation } from 'react-router-dom';
+
+// local hook for reading url params
+const useQuery = () => {
+  return new URLSearchParams(useLocation().search);
+}
 
 /**
  * The cats browser page component.
@@ -21,14 +27,37 @@ const CatsBrowserPage: React.FC = () => {
   // local state for controlling the load more button visibility
   const [loadMoreVisible, setLoadMoreVisibility] = useState<boolean>(true);
 
-  // call back function for changing the breed
-  const selectBreed = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const breedId = e.target.value;
-    const newSelectedBreed = breeds.find((breed: Breed) => breed.id === breedId);
+  // using the query hook for reading url params
+  const queryParams = useQuery();
+  // for navigation history manipulation
+  const history = useHistory<History>();
+
+  // finds the breed instance from the breed list
+  const findBreed = (breedId: string):  Breed | undefined => {
+    return breeds.find((breed: Breed) => breed.id === breedId);
+  }
+
+  // set selected breed and push url with params
+  const setAndPushBreed = (breedId: string): void => {
+    const newSelectedBreed = findBreed(breedId);
 
     if (setSelectedBreed) {
       setSelectedBreed(newSelectedBreed);
     }
+
+    if (newSelectedBreed !== undefined) {
+      // push and write url params for currently selected breed
+      history.push({
+        pathname: '/',
+        search: `?breed=${newSelectedBreed.id}`
+      });
+    }
+  }
+
+  // call back function for changing the breed
+  const onBreedChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const breedId = e.target.value;
+    setAndPushBreed(breedId);
   };
 
   // call back function for loading the next page
@@ -61,27 +90,55 @@ const CatsBrowserPage: React.FC = () => {
     }
   }
 
+  // function for rendering the breed dropdown
+  const renderBreedDropdown = () => {
+    let breedIdUrlParam = queryParams.get('breed');
+    breedIdUrlParam = breedIdUrlParam ?? '';
+
+    return (
+      <Col md={3} sm={6} className="col-12">
+        <Form.Group controlId="breed">
+          <Form.Label>Breed</Form.Label>
+          <Form.Control as="select" className="form-select" value={breedIdUrlParam} onChange={onBreedChange}>
+            <option>Select Breed</option>
+            {
+              breeds.map((breed: Breed) => (
+                <option key={breed.id} value={breed.id}>{ breed.name }</option>
+              ))
+            }
+          </Form.Control>
+        </Form.Group>
+      </Col>
+    );
+  }
+
+  // function for rendering the card list
+  const renderCardList = () => {
+    // determine if breed is preselected by using url params e.g ?breed=bamb
+    let breedIdUrlParam = queryParams.get('breed');
+    breedIdUrlParam = breedIdUrlParam ?? '';
+    // find the breed that was specified in the url params
+    const selectedBreed = findBreed(breedIdUrlParam);
+
+    return (
+      <CatCardList
+        breed={currentBreed}
+        preSelectedBreed={selectedBreed}
+        page={page}
+        setLoadMoreVisibility={setLoadMoreVisibility}
+      />
+    );
+  }
+
   return (
     <>
       <br/>
       <Row>
-        <Col md={3} sm={6} className="col-12">
-          <Form.Group controlId="breed">
-            <Form.Label>Breed</Form.Label>
-            <Form.Control as="select" className="form-select" onChange={selectBreed}>
-              <option>Select Breed</option>
-              {
-                breeds.map((breed: Breed) => (
-                  <option key={breed.id} value={breed.id}>{ breed.name }</option>
-                ))
-              }
-            </Form.Control>
-          </Form.Group>
-        </Col>
+        { renderBreedDropdown() }
       </Row>
       <br/>
       <Row>
-        <CatCardList breed={currentBreed} page={page} setLoadMoreVisibility={setLoadMoreVisibility}/>
+        { renderCardList() }
       </Row>
       { renderLoadMoreButton(loadMoreVisible, networkErrorHappened) }
       <br/>
