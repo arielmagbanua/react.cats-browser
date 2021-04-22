@@ -98,7 +98,7 @@ const CatCardList: React.FC<IProps> = ({ breed, preSelectedBreed, page, setLoadM
     return breedImages.map((breedImage: BreedImage) => (
       <CatCard
         key={breedImage.id}
-        id={breedImage.id}
+        imageId={breedImage.id}
         imageUrl={breedImage.url}
       />
     ));
