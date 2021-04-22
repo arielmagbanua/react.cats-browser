@@ -57,7 +57,7 @@ const CatCardList: React.FC<IProps> = ({ breed, preSelectedBreed, page, setLoadM
             return;
           }
 
-          if(sameBreedImageList(breedImages, newImages)){
+          if (sameBreedImageList(breedImages, newImages)) {
             // same list therefore no more new breed images
             // therefore hide now the load more button
             setLoadMoreVisibility(false);
