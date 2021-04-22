@@ -99,10 +99,21 @@ const CatBreedDetailsPage: React.FC = () => {
     );
   }
 
+  const renderContent = () => {
+    if (networkErrorHappened) {
+      return renderErrorMessage();
+    }
+
+    if (breed) {
+      return renderDetails();
+    }
+
+    return renderNoData();
+  }
+
   return (
     <>
-      { networkErrorHappened ? renderErrorMessage() : renderNoData() }
-      { breed && renderDetails() }
+      { renderContent() }
     </>
   );
 }
